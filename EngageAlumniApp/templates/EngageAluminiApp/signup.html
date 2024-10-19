@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engage Alumni - Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #1f2937; /* Dark gray background */
+            color: white;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background-color: #38a169;
+            color: white;
+        }
+
+        .alert-error {
+            background-color: #e53e3e;
+            color: white;
+        }
+    </style>
+    <script>
+        function toggleFormFields() {
+            const userType = document.querySelector('input[name="user_type"]:checked').value;
+            document.getElementById('student-fields').style.display = userType === 'student' ? 'block' : 'none';
+            document.getElementById('alumni-fields').style.display = userType === 'alumni' ? 'block' : 'none';
+        }
+
+        // Ensure that form fields are toggled correctly after the page loads
+        window.onload = function() {
+            toggleFormFields();
+        };
+    </script>
+</head>
+<body class="bg-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 py-4">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="flex items-center space-x-4 text-white font-bold">
+                <span>Logo</span>
+            </a>
+
+            <!-- Search and Login/Signup -->
+            <div class="flex items-center space-x-4">
+                <input type="text" placeholder="Search" class="px-3 py-2 border rounded-md border-white bg-gray-700 text-white focus:border-white focus:ring-white" />
+                <button class="border rounded-md border-white text-white font-semibold px-3 py-2 hover:bg-gray-700" aria-label="Search">Search</button>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="border-solid border-2 border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-700">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="border-solid border-2 border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-700">Login</a>
+                <a href="{% url 'signup' %}" class="border-solid border-2 border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-700">Signup</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Form Section -->
+    <div class="flex justify-center items-center min-h-screen bg-gray-900 text-white">
+        <div class="w-full max-w-lg">
+            <h2 class="text-center text-3xl font-bold mb-6">Sign Up</h2>
+
+            <!-- Alert Messages -->
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags == 'error' %}alert-error{% elif message.tags == 'success' %}alert-success{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Form -->
+            <form method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- User Type -->
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">I am signing up as:</label>
+                    <div class="flex items-center">
+                        <input type="radio" id="student" name="user_type" value="student" onclick="toggleFormFields()" class="mr-2" required />
+                        <label for="student" class="text-white">Student</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="alumni" name="user_type" value="alumni" onclick="toggleFormFields()" class="mr-2" required />
+                        <label for="alumni" class="text-white">Alumni</label>
+                    </div>
+                </div>
+
+                <!-- Student Fields -->
+                <div id="student-fields" style="display:none;">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">College User ID</label>
+                        <input type="text" name="college_user_id" class="w-full px-3 py-2 text-black" placeholder="College User ID" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">Department</label>
+                        <input type="text" name="department" class="w-full px-3 py-2 text-black" placeholder="Department" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">Email</label>
+                        <input type="email" name="email" class="w-full px-3 py-2 text-black" placeholder="Email" />
+                    </div>
+                </div>
+
+                <!-- Alumni Fields -->
+                <div id="alumni-fields" style="display:none;">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">Name</label>
+                        <input type="text" name="name" class="w-full px-3 py-2 text-black" placeholder="Name" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">Current Position</label>
+                        <input type="text" name="current_position" class="w-full px-3 py-2 text-black" placeholder="Current Position" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2">Marksheet</label>
+                        <input type="file" name="marksheet" class="w-full px-3 py-2 text-black" />
+                    </div>
+                </div>
+
+                <!-- User Credentials -->
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">Username</label>
+                    <input type="text" name="username" class="w-full px-3 py-2 text-black" placeholder="Username" required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">Password</label>
+                    <input type="password" name="password1" class="w-full px-3 py-2 text-black" placeholder="Password" required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">Confirm Password</label>
+                    <input type="password" name="password2" class="w-full px-3 py-2 text-black" placeholder="Confirm Password" required />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline">Sign Up</button>
+                </div>
+            </form>
+
+            <!-- Already have an account? -->
+            <p class="text-center mt-6">
+                Already have an account? <a href="{% url 'login' %}" class="text-blue-500">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Alumni Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

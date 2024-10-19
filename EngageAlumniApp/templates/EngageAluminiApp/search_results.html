@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-900 text-white">
+    <nav class="bg-gray-800 py-4">
+        <!-- Navigation content here -->
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-3xl font-bold mb-4">Search Results</h1>
+        
+        {% if results %}
+        <ul>
+            {% for user in results %}
+            <li class="bg-gray-800 p-4 rounded-lg mb-4">
+                <h2 class="text-xl font-semibold">{{ user.username }}</h2>
+                <p>Email: {{ user.email }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No results found.</p>
+        {% endif %}
+    </div>
+
+    <footer class="bg-gray-800 py-8">
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>

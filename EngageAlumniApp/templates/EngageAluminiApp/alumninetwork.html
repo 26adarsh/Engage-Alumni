@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect On Your Schedule</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-300 font-sans">
+
+<!-- Navbar -->
+<header class="bg-gray-800 text-white sticky top-0 w-full shadow-md z-50">
+    <nav class="text-center p-4">
+        <ul class="list-none m-0 p-0 inline-flex justify-center space-x-8">
+            <li><a href="#students" class="font-semibold text-lg no-underline hover:text-blue-400 transition-colors duration-300">Students</a></li>
+            <li><a href="{% url 'mentor' %}" class="font-semibold text-lg no-underline hover:text-blue-400 transition-colors duration-300">Mentors</a></li>
+            <li><a href="#faq" class="font-semibold text-lg no-underline hover:text-blue-400 transition-colors duration-300">FAQ</a></li>
+            <li><a href="#team" class="font-semibold text-lg no-underline hover:text-blue-400 transition-colors duration-300">Team</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Section -->
+<section class="flex justify-center items-center h-screen text-white">
+    <!-- Image Section -->
+    <div class="hidden lg:flex flex-1 h-full bg-cover bg-center" style="background-image: url('mentor.png');" aria-label="Image of a mentor interacting"></div>
+
+    <!-- Centered Text and Buttons Section -->
+    <div class="flex-1 flex flex-col justify-center items-center px-8 py-12 bg-gray-800 h-full">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold mb-6">Connect on Your Schedule</h1>
+            <p class="text-2xl mb-6 text-gray-400">No matter where you are.</p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col space-y-6">
+                <button class="bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:bg-green-700 hover:-translate-y-1 hover:scale-105"
+                    onclick="location.href='#become';">Become a Mentor</button>
+
+                <button class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:bg-blue-700 hover:-translate-y-1 hover:scale-105"
+                    onclick="location.href='#find';">Find a Mentor</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Optional JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.2.3/cdn.min.js" defer></script>
+
+</body>
+</html>
