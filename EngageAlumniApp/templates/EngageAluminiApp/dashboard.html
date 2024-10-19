@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engage Alumni</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+    <!-- for map  -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
+      async
+      defer
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #1f2937; /* Dark gray background */
+        color: white; /* Text color for better visibility on dark background */
+      }
+      /* for maps  */
+      #map {
+        width: 100%;
+        height: 600px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900">
+    <!-- Navbar -->
+<nav class="bg-gray-800 py-4">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <a href="#" class="flex items-center space-x-4 text-white font-bold">
+      <span>Logo</span>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="flex items-center space-x-8">
+      <!-- Alumni Network -->
+      <a href="{% url 'alumninetwork' %}" class="text-white font-semibold hover:text-gray-300">Alumni Network</a>
+
+      <!-- Career Opportunity -->
+      <a href="#" class="text-white font-semibold hover:text-gray-300">Career Opportunity</a>
+
+      <!-- Mentorship Program -->
+      <a href="#" class="text-white font-semibold hover:text-gray-300">Mentorship Program</a>
+
+      <!-- Events -->
+      <a href="{% url 'events' %}" class="text-white font-semibold hover:text-gray-300">Events</a>
+    </div>
+
+    <!-- Search and Login/Signup -->
+    <div class="flex items-center space-x-4">
+      <form method="get" action="{% url 'search' %}">
+          <input
+              type="text"
+              name="q"
+              placeholder="Search"
+              class="px-3 py-2 border rounded-md border-white bg-gray-700 text-white focus:border-white focus:ring-white"
+          />
+          <button
+              class="border rounded-md border-white text-white font-semibold px-3 py-2 hover:bg-gray-700"
+              aria-label="Search"
+          >
+              Search
+          </button>
+      </form>
+      <a
+        href="{% url 'login' %}"
+        class="border-solid border-2 border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-700"
+      >
+        Login
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-cover bg-center"
+      style="background-image: url(''); height: 70vh"
+    >
+      <div class="absolute inset-0 bg-black opacity-50"></div>
+      <!-- Overlay -->
+      <div
+        class="container mx-auto h-full flex justify-center items-center text-center"
+      >
+        <div class="relative z-10 text-white">
+          <h1 class="text-5xl font-bold mb-4">
+            Welcome to the alumni and student portal
+          </h1>
+          <p class="text-lg mb-6">
+            Join us to connect with alumni, get mentorship, and explore your
+            future
+          </p>
+          <a href="dashboard.html">
+            <button
+              class="border-solid border-2 border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-700"
+            >
+              GET STARTED &rarr;
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Title and Subtitle -->
+      <div class="text-center mb-12">
+        <h1 class="text-3xl font-bold mb-4">Alumni Engagement</h1>
+        <p class="text-lg text-gray-300">
+          The main objectives of the Alumni Association are to bring all alumni
+          spread across the globe into a single network and connect among them
+          and with the Institute to strengthen the bond between its members and
+          the Institute and work towards a shared common interest.
+        </p>
+      </div>
+
+      <!-- Image Cards Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="text-center bg-gray-800 p-6 rounded-lg">
+          <img
+            src="https://vaave.s3.amazonaws.com/block_images/_96b01579723b482730f43f9d6ce8c00b__.png"
+            alt="Humour"
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h2 class="text-xl font-semibold mb-2">HUMOUR</h2>
+          <p class="text-gray-400">
+            Is like jogging on the inside share a chuckle and spread the joy!
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="text-center bg-gray-800 p-6 rounded-lg">
+          <img
+            src="https://vaave.s3.amazonaws.com/block_images/_34ef6f35982b509c8939d86cd207adf4__.png"
+            alt="Stories"
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h2 class="text-xl font-semibold mb-2">STORIES</h2>
+          <p class="text-gray-400">
+            Share your stories and connect with your community.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="text-center bg-gray-800 p-6 rounded-lg">
+          <img
+            src="https://vaave.s3.amazonaws.com/block_images/_1ab0f474e50a34cf57f1bdb3be4e87fe__.png"
+            alt="Payments"
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h2 class="text-xl font-semibold mb-2">PAYMENTS</h2>
+          <p class="text-gray-400">
+            Scan and pay through UPI Payments for smooth operations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discover Programs Section -->
+    <div class="container mx-auto p-8">
+      <h1 class="text-4xl font-bold text-center mb-8">Discover our Programs</h1>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Donation Portal -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 relative">
+          <h2 class="text-xl font-semibold mb-4 text-white">Donation Portal</h2>
+          <ul class="text-gray-300 space-y-2">
+            <li>Secure Payment Processing</li>
+            <li>User Authentication</li>
+            <li>Tax Receipts</li>
+            <li>Terms and Conditions</li>
+          </ul>
+          <a href="#" class="text-blue-500 hover:underline mt-4 block"
+            >Learn More &rarr;</a
+          >
+        </div>
+
+        <!-- Job Portal -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 relative">
+          <h2 class="text-xl font-semibold mb-4 text-white">Job Portal</h2>
+          <ul class="text-gray-300 space-y-2">
+            <li>User-Friendly Navigation</li>
+            <li>Messaging System</li>
+            <li>Terms and Services</li>
+            <li>Web App</li>
+          </ul>
+          <a href="#" class="text-blue-500 hover:underline mt-4 block"
+            >Learn More &rarr;</a
+          >
+        </div>
+
+        <!-- Networking Hub -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 relative">
+          <h2 class="text-xl font-semibold mb-4 text-white">Networking Hub</h2>
+          <ul class="text-gray-300 space-y-2">
+            <li>Intuitive Design</li>
+            <li>Discussion Forums</li>
+            <li>Mentorship Matching</li>
+            <li>Live Support Chat</li>
+          </ul>
+          <a href="#" class="text-blue-500 hover:underline mt-4 block"
+            >Learn More &rarr;</a
+          >
+        </div>
+
+        <!-- Alumni Directory -->
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 relative">
+          <h2 class="text-xl font-semibold mb-4 text-white">Alumni Directory</h2>
+          <ul class="text-gray-300 space-y-2">
+            <li>Detailed Profiles</li>
+            <li>Advanced Search</li>
+            <li>Career Resources</li>
+            <li>Premium Membership</li>
+          </ul>
+          <a href="{% url 'alumnidirectory' %}" class="text-blue-500 hover:underline mt-4 block"
+            >Learn More &rarr;</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- for maps -->
+    <div>
+      <div class="text-center my-6">
+        <h1 class="text-3xl font-bold text-white mb-4">Worldwide Alumni</h1>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d61101340.06389615!2d92.81668181167181!3d20.81838318679667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1725605299592!5m2!1sen!2sin" width="1600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div id="map" class="map-container"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 py-8">
+      <div class="container mx-auto text-center text-white">
+        <p>&copy; 2024 Alumni Portal. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

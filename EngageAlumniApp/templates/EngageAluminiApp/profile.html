@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto py-12 px-6">
+      <h1 class="text-4xl font-bold mb-8">Your Profile</h1>
+
+      <!-- Profile Update Form -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label class="block text-white">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              value="{{ user.first_name }}"
+              class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+            />
+          </div>
+          <div>
+            <label class="block text-white">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              value="{{ user.last_name }}"
+              class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+            />
+          </div>
+          <div>
+            <label class="block text-white">Email</label>
+            <input
+              type="email"
+              name="email"
+              value="{{ user.email }}"
+              class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+            />
+          </div>
+          <div>
+            <label class="block text-white">Profile Picture</label>
+            <input
+              type="file"
+              name="profile_pic"
+              class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+        >
+          Update Profile
+        </button>
+      </form>
+
+      <!-- Job Posting Link -->
+      <div class="mt-12">
+        <a
+          href="{% url 'job_posting' %}"
+          class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+        >
+          Post a Job
+        </a>
+      </div>
+
+      <!-- Share Post/Project Link -->
+      <div class="mt-6">
+        <a
+          href="{% url 'share_post' %}"
+          class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+        >
+          Share a Post/Project
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post a Job</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto py-12 px-6">
+        <h1 class="text-4xl font-bold mb-8">Post a Job Opportunity</h1>
+        <!-- Job Posting Form -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 gap-6">
+                <div>
+                    <label class="block text-white">Job Title</label>
+                    <input
+                        type="text"
+                        name="job_title"
+                        class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+                        required
+                    />
+                </div>
+                <div>
+                    <label class="block text-white">Company Name</label>
+                    <input
+                        type="text"
+                        name="company_name"
+                        class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+                    />
+                </div>
+                <div>
+                    <label class="block text-white">Job Description</label>
+                    <textarea
+                        name="job_description"
+                        class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+                        required
+                    ></textarea>
+                </div>
+                <div>
+                    <label class="block text-white">Location</label>
+                    <input
+                        type="text"
+                        name="location"
+                        class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg"
+                    />
+                </div>
+            </div>
+            <button
+                type="submit"
+                class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+            >
+                Post Job
+            </button>
+        </form>
+    </div>
+</body>
+</html>
